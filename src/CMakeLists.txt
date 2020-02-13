@@ -7,3 +7,8 @@ target_link_libraries( densecrf PUBLIC Eigen3::Eigen )
 
 add_library( optimization SHARED optimization.cpp )
 target_link_libraries( optimization PUBLIC Eigen3::Eigen PRIVATE lbfgs )
+
+install(TARGETS densecrf optimization EXPORT ${PROJECT_NAME}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)

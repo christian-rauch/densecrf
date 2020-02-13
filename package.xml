@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>densecrf</name>
+  <version>0.0.0</version>
+  <description>The densecrf package</description>
+
+  <maintainer email="Christian.Rauch@ed.ac.uk">Christian Rauch</maintainer>
+
+
+  <!-- One license tag required, multiple allowed, one license per tag -->
+  <!-- Commonly used license strings: -->
+  <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
+  <license>TODO</license>
+
+
+  <!-- Url tags are optional, but multiple are allowed, one per tag -->
+  <!-- Optional attribute type can be: website, bugtracker, or repository -->
+  <!-- Example: -->
+  <!-- <url type="website">http://wiki.ros.org/densecrf</url> -->
+
+  <author email="philkr@cs.utexas.edu">Philipp Kraehenbuehl</author>
+
+  <buildtool_depend>cmake</buildtool_depend>
+
+  <build_depend>eigen</build_depend>
+  <build_export_depend>eigen</build_export_depend>
+
+  <export>
+    <build_type>cmake</build_type>
+  </export>
+</package>
