@@ -50,6 +50,11 @@ public:
 	// Create a dense CRF model of size N with M labels
 	DenseCRF( int N, int M );
 	virtual ~DenseCRF();
+
+	static void expAndNormalize ( Eigen::MatrixXf & out, const Eigen::MatrixXf & in );
+
+	size_t countPotentials() const { return pairwise_.size(); }
+	const PairwisePotential* getPotential(const size_t index) const { return pairwise_[index]; }
 	
 	// Add  a pairwise potential defined over some feature space
 	// The potential will have the form:    w*exp(-0.5*|f_i - f_j|^2)

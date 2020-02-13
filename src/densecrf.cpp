@@ -95,7 +95,7 @@ void  DenseCRF::setUnaryEnergy( const MatrixXf & L, const MatrixXf & f ) {
 ///////////////////////
 /////  Inference  /////
 ///////////////////////
-void expAndNormalize ( MatrixXf & out, const MatrixXf & in ) {
+void DenseCRF::expAndNormalize ( MatrixXf & out, const MatrixXf & in ) {
 	out.resize( in.rows(), in.cols() );
 	for( int i=0; i<out.cols(); i++ ){
 		VectorXf b = in.col(i);
