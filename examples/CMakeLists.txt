@@ -1,6 +1,9 @@
 add_executable( dense_inference ppm.cpp common.cpp dense_inference.cpp )
 target_link_libraries( dense_inference densecrf )
 
+add_executable( cheating_students cheating_students.cpp )
+target_link_libraries( cheating_students densecrf )
+
 add_executable( dense_learning ppm.cpp common.cpp dense_learning.cpp )
 target_link_libraries( dense_learning densecrf optimization )
 
