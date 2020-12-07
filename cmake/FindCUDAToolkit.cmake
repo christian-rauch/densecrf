@@ -626,7 +626,7 @@ else()
     endforeach()
 
     # Sort numerically in descending order, so we try the newest versions first.
-    list(SORT versions COMPARE NATURAL ORDER DESCENDING)
+    list(SORT versions ORDER DESCENDING)
 
     # With a descending list of versions, populate possible paths to search.
     set(search_paths)
@@ -774,7 +774,7 @@ endif()
 
 #-----------------------------------------------------------------------------
 # Perform version comparison and validate all required variables are set.
-include(${CMAKE_CURRENT_LIST_DIR}/FindPackageHandleStandardArgs.cmake)
+include(${CMAKE_ROOT}/Modules/FindPackageHandleStandardArgs.cmake)
 find_package_handle_standard_args(CUDAToolkit
   REQUIRED_VARS
     CUDAToolkit_INCLUDE_DIR
