@@ -1,6 +1,12 @@
 add_executable( dense_inference ppm.cpp common.cpp dense_inference.cpp )
 target_link_libraries( dense_inference densecrf )
 
+if(CUDAToolkit_FOUND)
+    find_package (Eigen3 REQUIRED NO_MODULE)
+    add_executable( dense_inference_gpu ppm.cpp dense_inference_gpu.cu )
+    target_link_libraries( dense_inference_gpu PUBLIC densecrf_gpu Eigen3::Eigen )
+endif()
+
 add_executable( dense_learning ppm.cpp common.cpp dense_learning.cpp )
 target_link_libraries( dense_learning densecrf optimization )
 

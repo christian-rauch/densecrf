@@ -4,9 +4,9 @@
 #include <cmath>
 #include <chrono>
 #include <iostream>
-#include "util.h"
-using namespace DenseCRF;
-using namespace std::chrono; 
+#include "ppm.h"
+
+using namespace std::chrono;
 using namespace std;
 
 // Store the colors we read, so that we can write them again.
@@ -73,9 +73,9 @@ int main( int argc, char* argv[]){
 		printf("Annotation size doesn't match image!\n");
 		return 1;
 	}
-	
+
 	short * label = classify( anno, W, H, M );
-	
+
 	// Put image and label into GPU memory.
 	short* labelGPU = nullptr;
 	cudaMalloc((void**)&labelGPU, sizeof(short) * W * H);
@@ -106,13 +106,13 @@ int main( int argc, char* argv[]){
 	// weight = 10
 	auto* appearancePairwise = PottsPotentialGPU<M, 5>::FromImage<float>(W, H, 10.0, 60.0, rgbFeatGPU, 20.0);
 	crf.addPairwiseEnergy( appearancePairwise );
-	
+
 	// Do map inference
-	auto start = steady_clock::now(); 
+	auto start = steady_clock::now();
 	crf.inference(10, true);
-	auto stop = steady_clock::now(); 
+	auto stop = steady_clock::now();
 	auto duration = duration_cast<microseconds>(stop - start);
-	cout << "Time Elaspsed for inference = " << duration.count() / 1000.0 << "ms" << endl; 
+	cout << "Time Elaspsed for inference = " << duration.count() / 1000.0 << "ms" << endl;
 	short * map = new short[W*H];
 	short * mapGPU = crf.getMap();
 	cudaMemcpy(map, mapGPU, sizeof(short) * W * H, cudaMemcpyDeviceToHost);
@@ -120,7 +120,7 @@ int main( int argc, char* argv[]){
 	// Store the result
 	unsigned char *res = colorize( map, W, H );
 	writePPM( argv[3], W, H, res );
-	
+
 	delete[] im;
 	delete[] anno;
 	delete[] res;
